@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Gestión Empleado</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="/imagen/empleado-de-oficina.png" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProyectoFinal3GestionEmpleado.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+    <main class="row p-0 m-0" style="height:100vh; ">
+        <aside class="col-2 border-end px-0" style="background-color:#f8f9fa;">
+            <h5 class="px-2 pt-4 m-0"><i class="bi bi-person-gear"></i> Administración </h5>
+
+            <hr class="mx-2"/>
+
+            <ul class="items">
+                 <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Departamento" asp-action="Index">
+                    <i class="bi bi-building"></i> Departamentos
+                 </a>
+                <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-person-workspace"></i> Cargos
+                </a>
+                <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-people"></i> Empleados
+                </a>
+            </ul>
+        </aside>
+
+        <section class="col-10 px-0">
+            <header>
+                <nav class="bg-danger navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div class="d-flex align-items-center gap-2 justify-content-between w-100 px-3">
+                            <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="~/imagen/empleado-de-oficina.png" alt="Logo" class="navbar-brand-logo" style="width: 40px; height: 40px; margin-right: 10px;" />
+                                Sistema Gestión Empleados
+                            </a>
+                            <i class="bi bi-box-arrow-right" style="cursor:pointer;"></i>
+                     </div>
+                </nav>
+            </header>
+
+            <div class="">
+                    @RenderBody()
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Sistema de Gestion de Empleados - Por Yoldys Rodriguez ❤️
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
