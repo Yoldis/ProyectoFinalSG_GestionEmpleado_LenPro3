@@ -13,33 +13,44 @@
 </head>
 <body>
     <main class="row p-0 m-0" style="height:100vh; ">
-        <aside class="col-2 border-end px-0" style="background-color:#f8f9fa;">
-            <h5 class="px-2 pt-4 m-0"><i class="bi bi-person-gear"></i> Administración </h5>
+        <aside class="col-2 border-end px-0 d-flex justify-content-between flex-column" 
+            style="background-color:#f8f9fa; height:calc(100vh - 58px)">
+            <div>
+                <h5 class="px-2 pt-4 m-0"><i class="bi bi-person-gear text-primary"></i> Administración </h5>
 
-            <hr class="mx-2"/>
+                <hr class="mx-2"/>
 
-            <ul class="items">
-                 <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Departamento" asp-action="Index">
-                    <i class="bi bi-building"></i> Departamentos
-                 </a>
-                <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-person-workspace"></i> Cargos
-                </a>
-                <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-people"></i> Empleados
-                </a>
-            </ul>
+                <ul class="items">
+                     <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Departamento" asp-action="Index">
+                        <i class="bi bi-building text-primary"></i> Departamentos
+                     </a>
+                    <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Cargo" asp-action="Index">
+                        <i class="bi bi-person-workspace text-primary"></i> Cargos
+                    </a>
+                    <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Empleado" asp-action="Index">
+                        <i class="bi bi-people text-primary"></i> Empleados
+                    </a>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-sm bg-primary text-white fw-bold mb-2">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </button>
+            </div>
         </aside>
 
         <section class="col-10 px-0">
             <header>
                 <nav class="bg-danger navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                     <div class="d-flex align-items-center gap-2 justify-content-between w-100 px-3">
-                            <a class="d-flex align-items-center gap-2 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="d-flex align-items-center gap-2 navbar-brand" asp-controller="Home" asp-action="Index">
                                 <img src="~/imagen/empleado-de-oficina.png" alt="Logo" class="navbar-brand-logo" style="width: 40px; height: 40px; margin-right: 10px;" />
                                 Sistema Gestión Empleados
                             </a>
-                            <i class="bi bi-box-arrow-right" style="cursor:pointer;"></i>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-sm bg-primary text-white">
+                                <i class="bi bi-house" style="cursor:pointer;"></i>
+                            </a>
                      </div>
                 </nav>
             </header>
@@ -48,13 +59,14 @@
                     @RenderBody()
             </div>
         </section>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2025 - Sistema de Gestion de Empleados - Por Yoldys Rodriguez ❤️
+            </div>
+        </footer>
     </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Sistema de Gestion de Empleados - Por Yoldys Rodriguez ❤️
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

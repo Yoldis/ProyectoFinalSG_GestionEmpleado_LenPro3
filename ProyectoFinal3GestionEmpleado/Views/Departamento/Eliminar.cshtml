@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Titulo"] = "Eliminar Departamento";
+    var mensajeExito = ViewBag.MensajeExito as string;
+    var mensajeError = ViewBag.MensajeError as string;
+}
+
+@model ProyectoFinal3GestionEmpleado.Models.Departamento
+
+<title>@ViewData["Titulo"]</title>
+
+<main class="container mt-4 animate__animated animate__fadeIn">
+    <h3 class="mb-4"><i class="bi bi-trash text-primary"></i> Eliminar Departamento</h3>
+
+    @if (!string.IsNullOrEmpty(mensajeExito))
+    {
+        <div class="alert alert-success text-center my-3 w-75 mx-auto">
+            @mensajeExito
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(mensajeError))
+    {
+        <div class="alert alert-danger text-center my-3 w-75 mx-auto">
+            @mensajeError
+        </div>
+    }
+
+    <form asp-action="Eliminar" method="post">
+         <input type="hidden" asp-for="DepartamentoId" />
+
+        <div class="mb-3">
+           <h5>
+                <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                ¿Estás seguro de que deseas eliminar el departamento: <strong>@Model.Nombre</strong>?
+            </h5>
+            <p>Esta acción no se puede deshacer.</p>
+        </div>
+          
+         <div class="mb-3 d-flex gap-3">
+                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm">Cancelar</a>
+         </div
+    </form>
+</main>

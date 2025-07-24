@@ -69,7 +69,3 @@ footer {
    transform:scale(1.05);
 }
 
-
-.modal {
-    z-index: 1060 !important;
-}
