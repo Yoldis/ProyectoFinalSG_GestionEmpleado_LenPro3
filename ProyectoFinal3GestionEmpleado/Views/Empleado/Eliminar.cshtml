@@ -1,0 +1,73 @@
+﻿@model ProyectoFinal3GestionEmpleado.ViewModels.EmpleadoViewModel
+@{
+    var mensajeExito = TempData["MensajeExito"] as string;
+    var mensajeError = TempData["MensajeError"] as string;
+}
+
+<title>@ViewData["Titulo"]</title>
+
+<main class="container mt-4 animate__animated animate__fadeIn">
+    <h3 class="mb-4"><i class="bi bi-trash text-danger"></i> Eliminar Empleado</h3>
+
+    @if (!string.IsNullOrEmpty(mensajeExito))
+    {
+        <div class="alert alert-success text-center my-3 w-75 mx-auto">
+            <i class="bi bi-check-circle-fill"></i> @mensajeExito
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(mensajeError))
+    {
+        <div class="alert alert-danger text-center my-3 w-75 mx-auto">
+            <i class="bi bi-x-circle-fill"></i> @mensajeError
+        </div>
+    }
+
+    <form asp-action="Eliminar" method="post">
+        <input type="hidden" asp-for="Empleado.EmpleadoId" />
+
+        <div class="mb-3 alert alert-warning">
+            <h5>
+                <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                ¿Estás seguro de que deseas eliminar al empleado:
+                <strong>@Model.Empleado.Nombre</strong>?
+            </h5>
+            <p>Esta acción no se puede deshacer.</p>
+        </div>
+
+        
+        <div class="card mb-3 shadow-sm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="text-primary"><i class="bi bi-info-circle-fill fs-5"></i> Informacion del Empleado</h5>
+                        <p><strong>Nombre:</strong> @Model.Empleado.Nombre</p>
+                        <p><strong>Departamento:</strong> @Model.DepartamentoNombre</p>
+                        <p><strong>Cargo:</strong> @Model.CargoNombre</p>
+                        <p><strong>Fecha de Inicio:</strong> @Model.Empleado.FechaInicio</p>
+                        <p><strong>Salario:</strong> @Model.Empleado.Salario.ToString("C")</p>
+                        <p><strong>Estado:</strong> @Model.Empleado.Estado</p>
+                        <p><strong>Tiempo en la Empresa:</strong> @Model.Empleado.TiempoEmpresa</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="text-primary"><i class="bi bi-cash-stack fs-5"></i> Deducciones</h5>
+                        <p><strong>ARS:</strong> @Model.Empleado.Ars?.ToString("C")</p>
+                        <p><strong>AFP:</strong> @Model.Empleado.Afp?.ToString("C")</p>
+                        <p><strong>IRS:</strong> @Model.Empleado.Isr?.ToString("C")</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        
+        <div class="mb-3 d-flex gap-3">
+            <button type="submit" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Eliminar
+            </button>
+            <a asp-action="Index" class="btn btn-secondary btn-sm">Cancelar</a>
+        </div>
+    </form>
+</main>

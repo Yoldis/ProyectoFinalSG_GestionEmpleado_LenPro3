@@ -15,13 +15,13 @@
     @if (!string.IsNullOrEmpty(mensajeExito))
     {
         <div class="alert alert-success text-center my-3 w-75 mx-auto">
-            @mensajeExito
+            <i class="bi bi-check-circle-fill"></i> @mensajeExito
         </div>
     }
     @if (!string.IsNullOrEmpty(mensajeError))
     {
         <div class="alert alert-danger text-center my-3 w-75 mx-auto">
-            @mensajeError
+            <i class="bi bi-x-circle-fill"></i> @mensajeError
         </div>
     }
 

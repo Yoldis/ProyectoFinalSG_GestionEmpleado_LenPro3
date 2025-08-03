@@ -84,6 +84,12 @@ namespace ProyectoFinal3GestionEmpleado.Controllers
                 }
                 else
                 {
+                    if(cargoExistente.Nombre == cargo.Nombre)
+                    {
+                        ViewBag.MensajeError = "El nombre del cargo no ha cambiado.";
+                        return View("Editar", cargo);
+                    }
+                    
                     cargoExistente.Nombre = cargo.Nombre;
                     var resultado = _context.SaveChanges();
                     if (resultado > 0)
@@ -143,6 +149,27 @@ namespace ProyectoFinal3GestionEmpleado.Controllers
                 ViewBag.MensajeError = $"Error al eliminar el cargo: {ex.Message}";
             }
             return View(cargo);
+        }
+
+        public IActionResult ExportarCSV()
+        {
+            var cargos = _context.Cargos.ToList();
+            if (cargos == null || !cargos.Any())
+            {
+                ViewBag.MensajeError = "No hay cargos para exportar.";
+                return RedirectToAction("Index");
+            }
+
+            var builder = new System.Text.StringBuilder();
+            builder.AppendLine("Id,Nombre");
+
+            foreach (var dep in cargos)
+            {
+                builder.AppendLine($"{dep.CargoId},{dep.Nombre}");
+            }
+
+            var bytes = System.Text.Encoding.UTF8.GetBytes(builder.ToString());
+            return File(bytes, "text/csv", "cargos.csv");
         }
     }
 }

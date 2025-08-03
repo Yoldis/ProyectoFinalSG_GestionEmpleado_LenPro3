@@ -14,20 +14,20 @@
     @if (!string.IsNullOrEmpty(mensajeExito))
     {
         <div class="alert alert-success text-center my-3 w-75 mx-auto">
-            @mensajeExito
+             <i class="bi bi-check-circle-fill"></i> @mensajeExito
         </div>
     }
     @if (!string.IsNullOrEmpty(mensajeError))
     {
         <div class="alert alert-danger text-center my-3 w-75 mx-auto">
-            @mensajeError
+            <i class="bi bi-x-circle-fill"></i> @mensajeError
         </div>
     }
 
     <form asp-action="Eliminar" method="post">
          <input type="hidden" asp-for="CargoId" />
 
-        <div class="mb-3">
+        <div class="mb-3 alert alert-warning">
            <h5>
                 <i class="bi bi-exclamation-triangle-fill text-warning"></i>
                 ¿Estás seguro de que deseas eliminar el cargo: <strong>@Model.Nombre</strong>?
@@ -36,8 +36,8 @@
         </div>
           
          <div class="mb-3 d-flex gap-3">
-                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
-                <a asp-action="Index" class="btn btn-secondary btn-sm">Cancelar</a>
+             <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
+             <a asp-action="Index" class="btn btn-secondary btn-sm">Cancelar</a>
          </div
     </form>
 </main>

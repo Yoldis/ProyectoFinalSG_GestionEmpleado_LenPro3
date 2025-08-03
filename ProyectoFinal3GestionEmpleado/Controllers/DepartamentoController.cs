@@ -85,13 +85,22 @@ namespace ProyectoFinal3GestionEmpleado.Controllers
                 }
                 else
                 {
-                    departamentoExistente.Nombre = departamento.Nombre;
-                    var resultado = _context.SaveChanges();
-                    if (resultado > 0)
+                    if( departamentoExistente.Nombre == departamento.Nombre)
                     {
-                        TempData["MensajeExito"] = $"Departamento '{departamento.Nombre}' actualizado correctamente.";
-                        ModelState.Clear();
-                        return RedirectToAction("Index");
+                        ViewBag.MensajeError = "El nombre del departamento no ha cambiado.";
+                        return View("Editar", departamento);
+                    }
+                    else
+                    {
+                        departamentoExistente.Nombre = departamento.Nombre;
+                        var resultado = _context.SaveChanges();
+                        if (resultado > 0)
+                        {
+                            TempData["MensajeExito"] = $"Departamento '{departamento.Nombre}' actualizado correctamente.";
+                            ModelState.Clear();
+                            return RedirectToAction("Index");
+                        }
+
                     }
                 }
 
@@ -144,5 +153,27 @@ namespace ProyectoFinal3GestionEmpleado.Controllers
             }
             return View(departamento);
         }
+
+        public IActionResult ExportarCSV()
+        {
+            var departamentos = _context.Departamentos.ToList();
+            if (departamentos == null || !departamentos.Any())
+            {
+                ViewBag.MensajeError = "No hay departamentos para exportar.";
+                return RedirectToAction("Index");
+            }
+
+            var builder = new System.Text.StringBuilder();
+            builder.AppendLine("Id,Nombre");
+
+            foreach (var dep in departamentos)
+            {
+                builder.AppendLine($"{dep.DepartamentoId},{dep.Nombre}");
+            }
+
+            var bytes = System.Text.Encoding.UTF8.GetBytes(builder.ToString());
+            return File(bytes, "text/csv", "departamentos.csv");
+        }
+
     }
 }

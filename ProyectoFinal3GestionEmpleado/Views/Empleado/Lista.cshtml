@@ -1,14 +1,13 @@
-﻿
+﻿@model List<ProyectoFinal3GestionEmpleado.ViewModels.EmpleadoViewModel>
 @{
-    var departamentos = ViewBag.Departamentos as List<ProyectoFinal3GestionEmpleado.Models.Departamento>;
-    var titulo = ViewData["Titulo"] as string ?? "Lista de Departamentos";
+    var titulo = ViewData["Titulo"] as string ?? "Lista de Empleados";
 }
 
 <title>@titulo</title>
 
 <main class="animate__animated animate__fadeIn">
     <header class="container d-flex align-items-center gap-2 justify-content-between">
-        <h3><i class="bi bi-building text-primary"></i> Departamentos</h3>
+        <h3><i class="bi bi-people text-primary"></i> Empleados</h3>
         <div class="d-flex align-items-center gap-2">
             <a asp-action="Registrar" type="button" class="custom-btn btn btn-sm bg-secondary text-white"><i class="bi bi-plus-circle-fill"></i> Agregar</a>
             <a asp-action="ExportarCSV" type="button" class="custom-btn btn btn-sm bg-success text-white"><i class="bi bi-filetype-exe"></i> Exportar</a>
@@ -18,14 +17,14 @@
     @if (TempData["MensajeExito"] != null)
     {
         <div class="alert alert-success text-center my-3 w-75 mx-auto">
-            <i class="bi bi-check-circle-fill"></i> @TempData["MensajeExito"]
+            @TempData["MensajeExito"]
         </div>
     }
 
-    @if (departamentos == null || !departamentos.Any())
+    @if (Model == null || !Model.Any())
     {
         <div class="alert alert-info text-center my-3 w-75 mx-auto">
-            <i class="bi bi-info-circle-fill"></i> No hay departamentos registrados.
+            <i class="bi bi-info-circle-fill"></i> No hay empleados registrados.
         </div>
     }
     else
@@ -35,22 +34,38 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Departamento</th>
+                        <th>Cargo</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Estado</th>
+                        <th>Tiempo Empresa</th>
+                        <th>ARS</th>
+                        <th>AFP</th>
+                        <th>IRS</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var dep in departamentos)
+                    @foreach (var empleado in Model)
                     {
                         <tr>
-                            <td>@dep.Nombre</td>
+                            <td>@empleado.Empleado.Nombre</td>
+                            <td>@empleado.DepartamentoNombre</td>
+                            <td>@empleado.CargoNombre</td>
+                            <td>@empleado.Empleado.FechaInicio</td>
+                            <td>@empleado.Empleado.Estado</td>
+                            <td>@empleado.Empleado.TiempoEmpresa</td>
+                            <td>@empleado.Empleado.Ars</td>
+                            <td>@empleado.Empleado.Afp</td>
+                            <td>@empleado.Empleado.Isr</td>
                             <td class="d-flex align-items-center gap-2">
-                                <a asp-action="Editar" asp-route-id="@dep.DepartamentoId"
+                                <a asp-action="Editar" asp-route-id="@empleado.Empleado.EmpleadoId"
                                    class="btn btn-sm btn-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
 
-                                <a asp-action="Eliminar" asp-route-id="@dep.DepartamentoId" 
-                                    class="btn btn-sm btn-danger">
+                                <a asp-action="Eliminar" asp-route-id="@empleado.Empleado.EmpleadoId"
+                                   class="btn btn-sm btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>

@@ -1,0 +1,109 @@
+﻿@model ProyectoFinal3GestionEmpleado.ViewModels.EmpleadoViewModel
+@{
+    ViewData["Titulo"] = "Registrar Empleado";
+    var mensajeExito = TempData["MensajeExito"] as string;
+    var mensajeError = TempData["MensajeError"] as string;
+}
+
+<title>@ViewData["Titulo"]</title>
+
+<main class="container mt-4 animate__animated animate__fadeIn overflow-auto" style="height: calc(100vh - 160px)">
+    <h3 class="mb-4"><i class="bi bi-plus-circle text-primary"></i> Registrar Empleado</h3>
+
+    @if (!string.IsNullOrEmpty(mensajeExito))
+    {
+        <div class="alert alert-success text-center my-3 w-75 mx-auto">
+            <i class="bi bi-check-circle-fill"></i> @mensajeExito
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(mensajeError))
+    {
+        <div class="alert alert-danger text-center my-3 w-75 mx-auto">
+            <i class="bi bi-x-circle-fill"></i> @mensajeError
+        </div>
+    }
+
+    <section>
+        <form asp-action="Registrar" method="post">
+            <div class="row">
+                <div class="mb-3 col-md-12">
+                    <label asp-for="Empleado.Nombre" class="form-label fw-bolder">Nombre</label>
+                    <input asp-for="Empleado.Nombre" class="form-control" placeholder="Nombre" />
+                    <span asp-validation-for="Empleado.Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.DepartamentoId" class="form-label fw-bolder">Departamento</label>
+                    <select asp-for="Empleado.DepartamentoId" class="form-select" asp-items="Model.Departamentos">
+                        <option value="">-- Seleccione un departamento --</option>
+                    </select>
+                    <span asp-validation-for="Empleado.DepartamentoId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.CargoId" class="form-label fw-bolder">Cargo</label>
+                    <select asp-for="Empleado.CargoId" class="form-select" asp-items="Model.Cargos">
+                        <option value="">-- Seleccione un cargo --</option>
+                    </select>
+                    <span asp-validation-for="Empleado.CargoId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.FechaInicio" class="form-label fw-bolder">Fecha de Inicio</label>
+                    <input asp-for="Empleado.FechaInicio" class="form-control" type="date" />
+                    <span asp-validation-for="Empleado.FechaInicio" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.Salario" class="form-label fw-bolder">Salario</label>
+                    <input asp-for="Empleado.Salario" class="form-control" type="number" placeholder="$0.00"/>
+                    <span asp-validation-for="Empleado.Salario" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.Estado" class="form-label fw-bolder">Estado</label>
+                    <select asp-for="Empleado.Estado" class="form-select">
+                        <option value="">-- Seleccione un estado --</option>
+                        <option value="No">No Vigente</option>
+                        <option value="Vigente">Vigente</option>
+                    </select>
+                    <span asp-validation-for="Empleado.Estado" class="text-danger"></span>
+                </div>
+
+              
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Empleado.TiempoEmpresa" class="form-label fw-bolder">Tiempo en la Empresa</label>
+                    <input asp-for="Empleado.TiempoEmpresa" class="form-control" readonly placeholder="Campo calculado" />
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label asp-for="Empleado.Afp" class="form-label fw-bolder">AFP</label>
+                    <input asp-for="Empleado.Afp" class="form-control" type="number" readonly placeholder="Campo calculado" />
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label asp-for="Empleado.Isr" class="form-label fw-bolder">ISR</label>
+                    <input asp-for="Empleado.Isr" class="form-control" type="number" readonly placeholder="Campo calculado" />
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label asp-for="Empleado.Ars" class="form-label fw-bolder">ARS</label>
+                    <input asp-for="Empleado.Ars" class="form-control" type="number" readonly placeholder="Campo calculado" />
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-center">
+                <button type="submit" class="btn btn-secondary btn-sm">
+                    <i class="bi bi-save"></i> Guardar
+                </button>
+                <a asp-action="Index" class="btn btn-danger btn-sm">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

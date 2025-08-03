@@ -4,27 +4,28 @@
     var titulo = ViewData["Titulo"] as string ?? "Lista de Cargos";
 }
 
-@model ProyectoFinal3GestionEmpleado.Models.Departamento;
-
 <title>@titulo</title>
 
 <main class="animate__animated animate__fadeIn">
     <header class="container d-flex align-items-center gap-2 justify-content-between">
         <h3><i class="bi bi-person-workspace text-primary"></i> Cargos</h3>
-        <a asp-action="Registrar" type="button" class="custom-btn btn btn-sm bg-success text-white"><i class="bi bi-plus-circle-fill"></i> Agregar</a>
+        <div class="d-flex align-items-center gap-2">
+            <a asp-action="Registrar" type="button" class="custom-btn btn btn-sm bg-secondary text-white"><i class="bi bi-plus-circle-fill"></i> Agregar</a>
+            <a asp-action="ExportarCSV" type="button" class="custom-btn btn btn-sm bg-success text-white"><i class="bi bi-filetype-exe"></i> Exportar</a>
+        </div>
     </header>
 
     @if (TempData["MensajeExito"] != null)
     {
         <div class="alert alert-success text-center my-3 w-75 mx-auto">
-            @TempData["MensajeExito"]
+            <i class="bi bi-check-circle-fill"></i> @TempData["MensajeExito"]
         </div>
     }
 
     @if (cargos == null || !cargos.Any())
     {
-        <div class="alert alert-warning text-center my-3 w-75 mx-auto">
-            No hay cargos registrados.
+        <div class="alert alert-info text-center my-3 w-75 mx-auto">
+            <i class="bi bi-info-circle-fill"></i> No hay cargos registrados.
         </div>
     }
     else
